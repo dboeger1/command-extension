@@ -3,8 +3,8 @@ use std::fmt::Display;
 
 #[derive(Debug)]
 pub struct Error {
-    pub(crate) message: String,
-    pub(crate) source: Option<std::io::Error>,
+    pub message: String,
+    pub source: Option<std::io::Error>,
 }
 
 impl Display for Error {
