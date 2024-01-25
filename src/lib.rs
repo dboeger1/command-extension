@@ -32,7 +32,7 @@ pub fn run_and_print(
                 "failed to execute command: \"{}\"",
                 command_string.to_string_lossy(),
             ),
-            source: Some(error),
+            source: Some(Box::new(error)),
         })?;
     let command_success = command_output.status.success();
 
