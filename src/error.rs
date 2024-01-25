@@ -18,6 +18,6 @@ impl std::error::Error for Error {
         self
             .source
             .as_ref()
-            .map(|error| error.as_ref() as &(dyn std::error::Error + 'static))
+            .map(|error| error.as_ref())
     }
 }
