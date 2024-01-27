@@ -29,7 +29,7 @@ pub fn run_and_print(
         .output()
         .map_err(|error| Error {
             message: format!(
-                "failed to execute command: \"{}\"",
+                "Failed to execute command: {}",
                 command_string.to_string_lossy(),
             ),
             source: Some(Box::new(error)),
@@ -40,12 +40,12 @@ pub fn run_and_print(
     if !command_success || print_on_success {
         // Select between standard and error output.
         let print = |message: &str| match command_success {
-            true => println!("{}", message),
-            false => eprintln!("{}", message),
+            true => println!("{message}"),
+            false => eprintln!("{message}"),
         };
 
         // Print command string.
-        print("==== command ====");
+        print("==== Command ====");
         print(format!(
             "{}",
             command_string.to_string_lossy(),
@@ -55,7 +55,7 @@ pub fn run_and_print(
         let command_exit_code = command_output
             .status
             .code();
-        print("==== exit code ====");
+        print("==== Exit Code ====");
         print(format!(
             "{}",
             command_exit_code.map_or_else(
@@ -89,7 +89,7 @@ pub fn run_and_print(
     if !command_success {
         return Err(Error {
             message: format!(
-                "command failed: \"{}\"",
+                "Command failed: {}",
                 command_string.to_string_lossy(),
             ),
             source: None,
