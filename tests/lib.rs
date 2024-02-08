@@ -3,37 +3,41 @@ use std::process::Command;
 
 
 #[test]
-fn test_success_print_on_success_false() -> Result<(), Error> {
+fn test_success_print_on_success_false() {
+    // Should not print.
     let mut john_cena = Command::new("echo");
     john_cena.arg("You can't see me!");
-    run_and_print(&mut john_cena, false)
+    let result = prun(&mut john_cena, false);
+    assert!(result.is_ok());
+    assert!(john_cena.status().unwrap().success());
 }
 
 #[test]
-fn test_success_print_on_success_true() -> Result<(), Error> {
+fn test_success_print_on_success_true() {
+    // Should print.
     let mut dutch = Command::new("echo");
     dutch.arg("I'm here! Come on! Do it!");
-    run_and_print(&mut dutch, true)
+    let result = prun(&mut dutch, true);
+    assert!(result.is_ok());
+    assert!(dutch.status().unwrap().success());
 }
 
 #[test]
 fn test_failure_print_on_success_false() {
-    let mut pinocchio = Command::new("test");
-    pinocchio.args([
-        "-d",
-        "/dev/null",
-    ]);
-    let result = run_and_print(&mut pinocchio, false);
-    assert!(result.is_err());
+    // Should print.
+    let mut pinocchio = Command::new("cat");
+    pinocchio.arg("I'm a real boy!");
+    let result = prun(&mut pinocchio, false);
+    assert!(result.is_ok());
+    assert!(!pinocchio.status().unwrap().success());
 }
 
 #[test]
 fn test_failure_print_on_success_true() {
-    let mut pinocchio = Command::new("test");
-    pinocchio.args([
-        "-d",
-        "/dev/null",
-    ]);
-    let result = run_and_print(&mut pinocchio, true);
-    assert!(result.is_err());
+    // Should print.
+    let mut pinocchio = Command::new("cat");
+    pinocchio.arg("I'm a real boy!");
+    let result = prun(&mut pinocchio, true);
+    assert!(result.is_ok());
+    assert!(!pinocchio.status().unwrap().success());
 }

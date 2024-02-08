@@ -9,7 +9,7 @@ use std::{
 pub use crate::error::Error;
 
 
-pub fn run_and_print(
+pub fn prun(
     command: &mut Command,
     print_on_success: bool,
 ) -> Result<(), Error> {
@@ -85,15 +85,5 @@ pub fn run_and_print(
         }
     }
 
-    // Return success or failure.
-    if !command_success {
-        return Err(Error {
-            message: format!(
-                "Command failed: {}",
-                command_string.to_string_lossy(),
-            ),
-            source: None,
-        });
-    }
     Ok(())
 }
