@@ -2,7 +2,10 @@ mod error;
 
 
 use std::{
-    process::Command,
+    process::{
+        Command,
+        Output,
+    },
     str::from_utf8,
 };
 
@@ -12,7 +15,7 @@ pub use crate::error::Error;
 pub fn prun(
     command: &mut Command,
     print_on_success: bool,
-) -> Result<(), Error> {
+) -> Result<Output, Error> {
     // Assemble command string.
     let mut command_string = command
         .get_program()
@@ -85,5 +88,5 @@ pub fn prun(
         }
     }
 
-    Ok(())
+    Ok(command_output)
 }

@@ -9,7 +9,7 @@ fn test_success_print_on_success_false() {
     john_cena.arg("You can't see me!");
     let result = prun(&mut john_cena, false);
     assert!(result.is_ok());
-    assert!(john_cena.status().unwrap().success());
+    assert!(result.unwrap().status.success());
 }
 
 #[test]
@@ -19,7 +19,7 @@ fn test_success_print_on_success_true() {
     dutch.arg("I'm here! Come on! Do it!");
     let result = prun(&mut dutch, true);
     assert!(result.is_ok());
-    assert!(dutch.status().unwrap().success());
+    assert!(result.unwrap().status.success());
 }
 
 #[test]
@@ -29,7 +29,7 @@ fn test_failure_print_on_success_false() {
     pinocchio.arg("I'm a real boy!");
     let result = prun(&mut pinocchio, false);
     assert!(result.is_ok());
-    assert!(!pinocchio.status().unwrap().success());
+    assert!(!result.unwrap().status.success());
 }
 
 #[test]
@@ -39,5 +39,5 @@ fn test_failure_print_on_success_true() {
     pinocchio.arg("I'm a real boy!");
     let result = prun(&mut pinocchio, true);
     assert!(result.is_ok());
-    assert!(!pinocchio.status().unwrap().success());
+    assert!(!result.unwrap().status.success());
 }
