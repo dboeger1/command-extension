@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "prun-rs"
+name = "command-extension-rs"
 version = "0.1.0"

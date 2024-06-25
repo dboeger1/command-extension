@@ -1,1 +1,1 @@
-# prun
+# command-extension
